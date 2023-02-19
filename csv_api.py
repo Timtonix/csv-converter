@@ -15,10 +15,18 @@ class CSVConverter:
             return csv_list
 
     def get_csv_headers(self):
-        csv = self.open_csv()
-        return csv[0]
+        csv_file = self.open_csv()
+        return csv_file[0]
 
+    def get_headers_position(self, headers: list) -> dict:
+        csv_headers = self.get_csv_headers()
+        headers_dict = {}
+
+        for header in headers:
+            if header in csv_headers:
+                headers_dict[header] = csv_headers.index(header)
+        return headers_dict
 
 if __name__ == "__main__":
     obj = CSVConverter("prout.csv")
-    print(type(obj.open_csv()))
+    obj.get_headers_position(["username", "password", "url"])
