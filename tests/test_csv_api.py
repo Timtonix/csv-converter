@@ -1,8 +1,10 @@
+import _csv
+import csv
 import csv_api
-import pytest
-# TODO: tester l'upload de fichier csv
-# TODO: fixture qui crée un fichier csv
 
 
-def test_open_csv():
-    pass
+def test_open_csv(tmp_csv_file):
+    with open(tmp_csv_file) as csv_file:
+        csv_obj = csv_api.CSVConverter(tmp_csv_file)
+        csv_opened = csv_obj.open_csv()
+        assert type(csv_opened) == _csv.Reader
