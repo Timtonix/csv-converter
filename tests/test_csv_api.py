@@ -24,5 +24,21 @@ def test_get_header_position(tmp_csv_file):
     assert csv_headers_position == expected_position
 
 
-def test_create_new_csv(tmp_csv_file):
-    pass
+def test_create_new_csv_list(tmp_csv_file):
+    csv_obj = csv_api.CSVConverter(tmp_csv_file)
+    new_csv = csv_obj.create_new_csv_list(["username", "url", "password"])
+    assert type(new_csv) == list
+    assert new_csv[0] == ["username", "url", "password"]
+
+
+def test_write_new_csv(tmp_csv_file):
+    csv_obj = csv_api.CSVConverter(tmp_csv_file)
+    new_csv = csv_obj.create_new_csv_list(["username", "url", "password"])
+    writen_csv = csv_obj.write_new_csv(["username", "url", "password"])
+    with open(writen_csv, "r") as new_csv_file:
+        csv_reader = csv.reader(new_csv_file)
+        csv_list = []
+        for row in csv_reader:
+            csv_list.append(row)
+
+        assert csv_list == new_csv
