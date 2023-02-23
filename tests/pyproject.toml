@@ -1,0 +1,14 @@
+[project]
+name = "csv-converter"
+authors = [{name = "Timtonix Devlowave", email = "devlowave.offi@gmail.com"}]
+requires-python=">=3.9"
+dynamic = ["version", "description"]
+dependencies = [
+    "typer==0.7.0"
+]
+
+
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
