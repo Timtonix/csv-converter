@@ -1,8 +1,8 @@
 import csv
-
+from pathlib import Path
 
 class CSVConverter:
-    def __init__(self, csv_path):
+    def __init__(self, csv_path: Path):
         self.csv_path = csv_path
 
     def open_csv(self):
@@ -44,11 +44,11 @@ class CSVConverter:
 
         return csv_list
 
-    def write_new_csv(self, headers: list):
-        with open("updated_csv.csv", "w", newline="", encoding="UTF-8") as csv_write:
+    def write_new_csv(self, headers: list, target: Path):
+        with open(target, "w", newline="", encoding="UTF-8") as csv_write:
             writer = csv.writer(csv_write)
             writer.writerows(self.create_new_csv_list(headers))
-        return "updated_csv.csv"
+        return target
 
 
 
